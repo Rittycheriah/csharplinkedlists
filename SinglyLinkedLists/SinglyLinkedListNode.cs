@@ -18,7 +18,7 @@ namespace SinglyLinkedLists
             get { return next; }
             set
             {
-                if (value.Equals(this)){
+                if (this == value || value == null){
                     throw new ArgumentException();
                 }
 
@@ -60,24 +60,14 @@ namespace SinglyLinkedLists
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
         public int CompareTo(Object obj)
         {
+            /* this > null so, if comparing to null and something exists, == 1*/ 
             SinglyLinkedListNode other_node = obj as SinglyLinkedListNode;
-            if (this.value == other_node.Value)
+            if ( other_node == null)
             {
-                return 0;
-            }else {
-                /* What are other ways to compare??? */
-                throw new NotImplementedException();
+                return 1;
+            } else {
+                return this.value.CompareTo(other_node.Value);
             }
-        }
-
-        public static bool operator ==(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
-        {
-            return node1.CompareTo(node2) == 0;
-        }
-
-        public static bool operator !=(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
-        {
-            return !(node1 == node2);
         }
 
         public bool IsLast()
@@ -91,16 +81,16 @@ namespace SinglyLinkedLists
 
             /* Refactor 1: no else statement 
 
-            if (this.next == null) {
+            if (this.Next.Equals(null)) {
                 return true;
             } 
                 return false;
+            
             */
 
             /* Refactor 2 */
 
-            return this.next.Equals(null);
-
+            return this.next == null;
         }
 
         public override string ToString()
@@ -108,6 +98,9 @@ namespace SinglyLinkedLists
             return this.value;
         }
 
-
+        public override bool Equals(object obj)
+        {
+            return this.CompareTo(obj) == 0;
+        }
     }
 }
