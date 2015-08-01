@@ -18,7 +18,7 @@ namespace SinglyLinkedLists
             get { return next; }
             set
             {
-                if (value == this){
+                if (value.Equals(this)){
                     throw new ArgumentException();
                 }
 
@@ -60,7 +60,24 @@ namespace SinglyLinkedLists
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
         public int CompareTo(Object obj)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode other_node = obj as SinglyLinkedListNode;
+            if (this.value == other_node.Value)
+            {
+                return 0;
+            }else {
+                /* What are other ways to compare??? */
+                throw new NotImplementedException();
+            }
+        }
+
+        public static bool operator ==(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
+        {
+            return node1.CompareTo(node2) == 0;
+        }
+
+        public static bool operator !=(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
+        {
+            return !(node1 == node2);
         }
 
         public bool IsLast()
@@ -82,7 +99,7 @@ namespace SinglyLinkedLists
 
             /* Refactor 2 */
 
-            return this.next == null;
+            return this.next.Equals(null);
 
         }
 
@@ -90,5 +107,7 @@ namespace SinglyLinkedLists
         {
             return this.value;
         }
+
+
     }
 }
