@@ -43,7 +43,12 @@ namespace SinglyLinkedLists
                 first_node = new SinglyLinkedListNode(value);
             }
             else {
-
+                var node = this.first_node;
+                while (!node.IsLast())
+                {
+                    node = node.Next;
+                }
+                node.Next = new SinglyLinkedListNode(value);
             }
         }
 
@@ -56,7 +61,16 @@ namespace SinglyLinkedLists
             }
             else
             {
-                return 0;
+                int length = 1;
+                var node = this.first_node;
+                // complexity is O(n)
+                while (node.Next != null)
+                {
+                    length++;
+                    node = node.Next;
+                }
+
+                return length;
             }
         }
 
@@ -66,8 +80,21 @@ namespace SinglyLinkedLists
             {
                 throw new ArgumentOutOfRangeException();
             }
-            else {
-                return ""; // placeholder
+            else
+            {
+                var node = this.first_node;
+                
+                for (var i = 0; i <= index; i++)
+                {
+                    if (i == index)
+                    {
+                        break;
+                    }
+
+                    node = node.Next;
+                }
+
+                return node.Value;
             }
         }
 
@@ -100,12 +127,18 @@ namespace SinglyLinkedLists
         // HINT 3: If you highlight code and right click, you can use the refactor menu to extract a method for you...
         public string Last()
         {
-            throw new NotImplementedException();
-            // Provide a second implementation of count (HOMEWORK)
-
-            // if the list is empty count = 0 
-            // this.Count() = 0 
-
+            var node = this.first_node;
+            if (node == null)
+            {
+                return null;
+            } else
+            {
+                while (!node.IsLast())
+                {
+                    node = node.Next;
+                }
+                return node.Value;
+            }
         }
 
         public void Remove(string value)
