@@ -155,5 +155,59 @@ namespace SinglyLinkedLists
         {
             throw new NotImplementedException();
         }
+
+        public override string ToString()
+        {
+            //var opening = "{";
+            //var ending = " }";
+            //var space = " ";
+            //var output = "";
+            //var quote = "\"";
+            //var comma = "," + space;
+            //var node = this.first_node;
+            //output += opening;
+
+            //if (this.Count() >= 1)
+            //{
+            //    output += space;
+            //    while (!node.IsLast()) {
+            //        output = quote + node.Value + quote;
+            //        node = node.Next;
+            //    }
+            //    output += quote + this.Last() + quote;
+            //}
+
+            //output += space;
+            //output += ending;
+            //return output;
+
+            var strBuilder = new StringBuilder();
+            var node = this.first_node;
+            var string2Return = " ";
+
+            strBuilder.Append("{ ");
+
+            //// do some stuff
+            if (this.Count() == 1 || this.Count() == 0)
+            {
+                while (node != null)
+                {
+                    strBuilder.Append("\"").Append(node.Value).Append("\" ").ToString();
+                    node = node.Next;
+                }
+                strBuilder.Append("}");
+            }
+            else
+            {
+                while (!node.IsLast())
+                {
+                    strBuilder.Append("\"").Append(node.Value).Append("\", ").ToString();
+                    node = node.Next;
+                }
+
+                strBuilder.Append("\"").Append(this.Last()).Append("\" }").ToString();
+            }
+            return string2Return = strBuilder.ToString();
+        }
     }
 }
