@@ -152,8 +152,15 @@ namespace SinglyLinkedLists
         }
 
         public string[] ToArray()
-        {
-            throw new NotImplementedException();
+        { 
+            string[] array = new string[this.Count()];
+
+            for (var i = 0; i < this.Count(); i++)
+            {
+                array[i] = this.ElementAt(i);
+            }
+
+            return array;
         }
 
         public override string ToString()
