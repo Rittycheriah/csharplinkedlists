@@ -305,16 +305,45 @@ namespace SinglyLinkedLists
 
         public void Sort()
         {
-            throw new NotImplementedException();
+            if (this.Count() < 2)
+            {
+                return;
+            }
+            else {
+                while (!this.IsSorted())
+                {
+                    var node = first_node;
+                    var nodeTwo = node.Next;
+                    for (var i = 1; i < this.Count(); i++)
+                    {
+                        if (node.Value.CompareTo(node.Next.Value) > 0)
+                        {
+                            var temp = node.Next.Value;
+                            nodeTwo.Value = node.Value;
+                            node.Value = temp;
+                        }
+
+                        node = node.Next;
+                        nodeTwo = nodeTwo.Next;
+                    }
+                }
+            } 
         }
 
         public string[] ToArray()
         { 
             string[] array = new string[this.Count()];
 
-            for (var i = 0; i < this.Count(); i++)
+            if (this.Count() > 0)
             {
-                array[i] = this.ElementAt(i);
+                for (var i = 0; i < this.Count(); i++)
+                {
+                    array[i] = this.ElementAt(i);
+                }
+            }
+            else 
+            {
+                array = new string[] { }; 
             }
 
             return array;
