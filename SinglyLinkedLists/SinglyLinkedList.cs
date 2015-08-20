@@ -240,11 +240,7 @@ namespace SinglyLinkedLists
 
         public bool IsSorted()
         {
-            if (this.Count() < 2 ) 
-            {
-                return true;
-            }
-            else
+            if (this.Count() != 1 || this.first_node == null ) 
             {
                 for (var i = 0; i < this.Count(); i++)
                 {
@@ -256,9 +252,9 @@ namespace SinglyLinkedLists
 
                     currentNode = currentNode.Next;
                 }
-
-                return true;
             }
+
+            return true;
         }
 
         // HINT 1: You can extract this functionality (finding the last item in the list) from a method you've already written!
@@ -305,29 +301,23 @@ namespace SinglyLinkedLists
 
         public void Sort()
         {
-            if (this.Count() < 2)
+            while (!IsSorted())
             {
-                return;
-            }
-            else {
-                while (!this.IsSorted())
+                var node = this.first_node;
+                var nodeTwo = node.Next;
+                for (int i = 1; i < this.listLength; i++)
                 {
-                    var node = first_node;
-                    var nodeTwo = node.Next;
-                    for (var i = 1; i < this.Count(); i++)
+                    if (node.CompareTo(nodeTwo) > 0)
                     {
-                        if (node.Value.CompareTo(node.Next.Value) > 0)
-                        {
-                            var temp = node.Next.Value;
-                            nodeTwo.Value = node.Value;
-                            node.Value = temp;
-                        }
-
-                        node = node.Next;
-                        nodeTwo = nodeTwo.Next;
+                        var temp = nodeTwo.Value;
+                        nodeTwo.Value = node.Value;
+                        node.Value = temp;
                     }
+
+                    node = node.Next;
+                    nodeTwo = nodeTwo.Next;
                 }
-            } 
+            }                
         }
 
         public string[] ToArray()
